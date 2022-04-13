@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 
 const App = () => {
   const [tarea, setTarea] = React.useState('');
-  const [tareas, setTareas]= React.useState([]);
+  const [tareas, setTareas] = React.useState([]);
   const agregarTarea = e => {
     e.preventDefault()
 
@@ -23,12 +23,18 @@ const App = () => {
           <div className="col-8">
             <h4 className="text-center">Lista de tareas</h4>
             <ul className="list-group">
-              <li className="list-group-item">
-                <span className="lead float-start">Nombre tarea</span>
+              {
+                tareas.map(item => (
+                  <li className="list-group-item" key={item.id}>
+                    <span className="lead float-start">{item.NombreTarea}</span>
+                    <button className="btn btn-danger btn-sm float-end mt-2 mx-2">Eliminar</button>
+                    <button className="btn btn-warning btn-sm float-end mt-2">Editar</button>
+                  </li>
+                ))
+              }
 
-                <button className="btn btn-danger btn-sm float-end mt-2 mx-2">Eliminar</button>
-                <button className="btn btn-warning btn-sm float-end mt-2">Editar</button>
-              </li>
+
+
             </ul>
           </div>
           <div className="col-4">
