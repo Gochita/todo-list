@@ -6,10 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 https://charming-buttercream-4099e4.netlify.app
 
 
+# Muestra funcionalidad video
 
-https://user-images.githubusercontent.com/45043430/163274435-95dacc70-5be3-4bf8-a4b4-10013c9ebeb1.mp4
-
-
+https://youtu.be/Reyw5RRYoOw
 
 
 ![image](https://user-images.githubusercontent.com/45043430/163273828-4351763b-f30c-42ab-99cb-e2b7ef345c54.png)
