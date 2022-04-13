@@ -4,6 +4,11 @@ import { nanoid } from 'nanoid'
 const App = () => {
   const [tarea, setTarea] = React.useState('');
   const [tareas, setTareas] = React.useState([]);
+  const eliminarTarea = id => {
+    const arrayFiltrado = tareas.filter(item => item.id !== id)
+    setTareas(arrayFiltrado)
+
+  }
   const agregarTarea = e => {
     e.preventDefault()
 
@@ -11,13 +16,15 @@ const App = () => {
       console.log('elemento vacio');
       return
     }
-    console.log(tarea);
     setTareas([...tareas, { id: nanoid(), NombreTarea: tarea }])
     setTarea('')
   }
   return (
     <div className='container mt-5'>
-      <h1 className='text-center'>crud simple</h1>
+      <h1 className='text-center'>Pendientes</h1>
+      <br />
+      <br />
+      <br />
       <h1>
         <div className="row">
           <div className="col-8">
@@ -27,8 +34,14 @@ const App = () => {
                 tareas.map(item => (
                   <li className="list-group-item" key={item.id}>
                     <span className="lead float-start">{item.NombreTarea}</span>
-                    <button className="btn btn-danger btn-sm float-end mt-2 mx-2">Eliminar</button>
-                    <button className="btn btn-warning btn-sm float-end mt-2">Editar</button>
+                    <button
+                      className="btn btn-danger btn-sm float-end mt-2 mx-2"
+                      onClick={() => eliminarTarea(item.id)}
+                    >Eliminar</button>
+
+                    <button
+                      className="btn btn-dark btn-sm float-end mt-2"
+                    >Editar</button>
                   </li>
                 ))
               }
@@ -49,7 +62,7 @@ const App = () => {
               />
               <div className="d-grid gap-2">
                 <button
-                  className="btn btn-dark btn-block"
+                  className="btn btn-success btn-block"
                   type='submit'
                 >Agregar</button>
               </div>
