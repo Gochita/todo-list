@@ -1,5 +1,6 @@
 import React from 'react'
 import { nanoid } from 'nanoid'
+import ReactDOM from 'react-dom/client';
 
 const App = () => {
   const [tarea, setTarea] = React.useState('');
@@ -7,6 +8,7 @@ const App = () => {
   const [modoEdicion, setModoEdicion] = React.useState(false);
   const [id, setId] = React.useState('');
   const [error, setError] = React.useState(null);
+
 
 
   const eliminarTarea = id => {
@@ -55,19 +57,19 @@ const App = () => {
   }
   return (
     <div className='container mt-5'>
-      <h1 className='text-center'>Pendientes</h1>
+      <div id='root'></div>
+      <h1 className='text-center shadow-lg p-3 mb-5 bg-body rounded'>Pendientes</h1>
       <hr />
       <br />
       <br />
       <br />
       <h1>
-        <div className="row">
+        <div className="row shadow p-3 mb-5 bg-body rounded">
           <div className="col-8">
             <h4 className="text-center">Lista de tareas</h4>
             <ul className="list-group">
               {
                 tareas.length === 0 ? (
-                  // <li className="list-group item">No hay pendientes</li>
                   <div className="alert alert-danger" role="alert">
                     No hay tareas
                   </div>
@@ -93,7 +95,7 @@ const App = () => {
 
             </ul>
           </div>
-          <div className="col-4">
+          <div className="col-4 shadow p-3 mb-5 bg-body rounded">
             <h4 className="text-center">
               {
                 modoEdicion ? 'Editar' : 'Agregar'
@@ -125,11 +127,14 @@ const App = () => {
                     className="btn btn-success btn-block"
                     type='submit'
                   >Agregar</button>
+                  
                 }
+               
 
               </div>
 
             </form>
+          
           </div>
         </div>
       </h1>
