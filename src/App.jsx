@@ -4,11 +4,18 @@ import { nanoid } from 'nanoid'
 const App = () => {
   const [tarea, setTarea] = React.useState('');
   const [tareas, setTareas] = React.useState([]);
+  const [modoEdicion, setModoEdicion] = React.useState(false);
+  const [id, setId] = React.useState('');
+
+
+
   const eliminarTarea = id => {
     const arrayFiltrado = tareas.filter(item => item.id !== id)
     setTareas(arrayFiltrado)
 
   }
+
+
   const agregarTarea = e => {
     e.preventDefault()
 
@@ -18,6 +25,29 @@ const App = () => {
     }
     setTareas([...tareas, { id: nanoid(), NombreTarea: tarea }])
     setTarea('')
+  }
+
+  const editar = item => {
+    setModoEdicion(true)
+    setTarea(item.NombreTarea)
+    setId(item.id)
+
+  }
+
+  const editarTarea = e => {
+    e.preventDefault();
+    if (!tarea.trim()) {
+      console.log('elemento vacio');
+      return
+    }
+    const arrayEditado = tareas.map(
+      item => item.id === id ? { id, NombreTarea: tarea } : item
+      )
+      setTareas(arrayEditado)
+      setModoEdicion(false)
+      setTarea('')
+      setId('')
+
   }
   return (
     <div className='container mt-5'>
@@ -41,6 +71,7 @@ const App = () => {
 
                     <button
                       className="btn btn-dark btn-sm float-end mt-2"
+                      onClick={() => editar(item)}
                     >Editar</button>
                   </li>
                 ))
@@ -51,8 +82,12 @@ const App = () => {
             </ul>
           </div>
           <div className="col-4">
-            <h4 className="text-center">Formulario</h4>
-            <form onSubmit={agregarTarea}>
+            <h4 className="text-center">
+              {
+                modoEdicion ? 'Editar' : 'Agregar'
+              }
+            </h4>
+            <form onSubmit={modoEdicion ? editarTarea : agregarTarea}>
               <input
                 type="text"
                 className="form-control mb-2"
@@ -61,10 +96,18 @@ const App = () => {
                 value={tarea}
               />
               <div className="d-grid gap-2">
-                <button
-                  className="btn btn-success btn-block"
-                  type='submit'
-                >Agregar</button>
+                {
+                  modoEdicion ? (
+                    <button
+                      className="btn btn-warning btn-block"
+                      type='submit'
+                    >hecho</button>
+                  ) : <button
+                    className="btn btn-success btn-block"
+                    type='submit'
+                  >Agregar</button>
+                }
+
               </div>
 
             </form>
